@@ -7,74 +7,51 @@
 
 import Alamofire
 import Combine
+import UIKit
 
 protocol CommonServiceProtocol: AnyObject {
-    func getRockets() -> AnyPublisher<[RocketModel], Error>
-    func getLaunchs(rocketId: String) -> AnyPublisher<[LaunchModel], Error>
+    func getRockets() -> AnyPublisher<[RocketModel], NetworkError>
+    func getLaunchs() -> AnyPublisher<[LaunchModel], NetworkError>
 }
 
 extension DIContainer {
     class CommonService: CommonServiceProtocol {
         
         private let appState: Store<AppState>
+        private let apiManager: APIManager
         private let storage: StorageService
         private var cancelBag = CancelBag()
         
-        init(appState: Store<AppState>, storage: StorageService) {
+        init(appState: Store<AppState>, apiManager: APIManager, storage: StorageService) {
             self.appState = appState
+            self.apiManager = apiManager
             self.storage = storage
         }
         
-        func getRockets() -> AnyPublisher<[RocketModel], Error> {
-            return Future({ [weak self] promise  in
-                guard let self = self else { return }
-                
-                AF.request("\(Config.baseUrl)/\(Config.apiCall.rockets)")
-                    .validate()
-                    .responseDecodable(of: [RocketModel].self) { response in
-                        switch response.result {
-                        case .success(let value):
-                            promise(.success(value))
-                            
-                        case .failure(let error):
-                            print("Request error = \(error)")
-                            promise(.failure(error))
-                        }
-                    }
-            }).eraseToAnyPublisher()
+        func getRockets() -> AnyPublisher<[RocketModel], NetworkError>  {
+            let publisher: AnyPublisher<[RocketModel], NetworkError> =
+            apiManager.call(apiMethod: .rockets)
+            
+            return publisher
+                .receive(on: DispatchQueue.main)
+                .eraseToAnyPublisher()
         }
         
-        func getLaunchs(rocketId: String) -> AnyPublisher<[LaunchModel], Error> {
-            return Future({ [weak self] promise  in
-                guard let self = self else { return }
-                
-                AF.request("\(Config.baseUrl)/\(Config.apiCall.launches)")
-                    .validate()
-                    .responseDecodable(of: [LaunchModel].self) { response in
-                        switch response.result {
-                        case .success(let value):
-                            var launchs: [LaunchModel] = []
-                            
-                            launchs = value.filter({ item in
-                                item.rocket == rocketId
-                            })
-                            
-                            promise(.success(launchs))
-                            
-                        case .failure(let error):
-                            print("Request error = \(error)")
-                            promise(.failure(error))
-                        }
-                    }
-            }).eraseToAnyPublisher()
+        func getLaunchs() -> AnyPublisher<[LaunchModel], NetworkError>  {
+            let publisher: AnyPublisher<[LaunchModel], NetworkError> =
+            apiManager.call(apiMethod: .launches)
+            
+            return publisher
+                .receive(on: DispatchQueue.main)
+                .eraseToAnyPublisher()
         }
         
         static let stub: CommonService = {
-            let appState = Store(AppState())
             let repo = StorageRepo()
-            let storageService = StorageService(appState: appState, repo: repo)
+            let apiManager = APIManager()
+            let storageService = StorageService(appState: .init(.preview), repo: repo)
             
-            return CommonService(appState: .init(.preview), storage: storageService)
+            return CommonService(appState: .init(.preview), apiManager: apiManager, storage: storageService)
         }()
     }
 }

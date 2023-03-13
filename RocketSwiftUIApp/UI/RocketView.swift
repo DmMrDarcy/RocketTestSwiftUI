@@ -30,7 +30,7 @@ struct RocketView: View {
                 }
                 
                 if vm.isError {
-                    ErrorView()
+                    ErrorView(error: vm.networkError)
                 }
                 
             }
@@ -156,6 +156,7 @@ extension RocketView {
     class ViewModel: ObservableObject {
         @Published var loading: Bool = false
         @Published var isError: Bool = false
+        @Published var networkError: NetworkError? = nil
         @Published var showLaunches: Bool = false
         @Published var showSettings: Bool = false
         
@@ -178,7 +179,8 @@ extension RocketView {
                 .sink { [weak self] complition in
                     guard let self = self else {return}
                     switch complition {
-                    case .failure(_):
+                    case .failure(let error):
+                        self.networkError = error
                         self.isError = true
                     case .finished:
                         break
@@ -195,19 +197,20 @@ extension RocketView {
         }
         
         func getLaunchs() {
-            container.commonServices.getLaunchs(rocketId: rocket!.id)
+            container.commonServices.getLaunchs()
                 .receive(on: DispatchQueue.main)
                 .sink { [weak self] complition in
                     guard let self = self else {return}
                     switch complition {
-                    case .failure(_):
+                    case .failure(let error):
+                        self.networkError = error
                         self.isError = true
                     case .finished:
                         break
                     }
                 } receiveValue: {[weak self] launches in
                     guard let self = self else {return}
-                    self.launches = launches
+                    self.launches = launches.filter { $0.rocket == self.rocket!.id }
                 }
                 .store(in: cancelBag)
         }

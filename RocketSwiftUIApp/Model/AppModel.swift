@@ -21,7 +21,7 @@ enum MassUnitsModel: Codable, Equatable {
     case lb
 }
 
-enum TypeRocketParamsModel: Codable, Equatable {
+enum TypeRocketParamsModel {
     case height
     case diameter
     case mass

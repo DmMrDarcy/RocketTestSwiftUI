@@ -45,9 +45,15 @@
 		28053494299D04E200BCCD50 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28053493299D04E200BCCD50 /* SettingsView.swift */; };
 		28053497299D15F800BCCD50 /* StorageRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28053496299D15F800BCCD50 /* StorageRepo.swift */; };
 		28053499299D1ACC00BCCD50 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28053498299D1ACC00BCCD50 /* StorageService.swift */; };
+		2834923E29BF5FEC00F9DD24 /* HTTPHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2834923D29BF5FEC00F9DD24 /* HTTPHeaders.swift */; };
 		287A153B299D5EA9002B25F2 /* ParameterBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287A153A299D5EA9002B25F2 /* ParameterBlock.swift */; };
 		287A1546299D6679002B25F2 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287A1545299D6679002B25F2 /* Config.swift */; };
 		287A1548299D6797002B25F2 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287A1547299D6797002B25F2 /* ErrorView.swift */; };
+		288AE1CB29BB638300E24C27 /* RequestParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288AE1CA29BB638300E24C27 /* RequestParameters.swift */; };
+		28DB4EB029B74E34006FEA4D /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DB4EAF29B74E34006FEA4D /* APIManager.swift */; };
+		28DB4EB229B763F1006FEA4D /* NetworkConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DB4EB129B763F1006FEA4D /* NetworkConfiguration.swift */; };
+		28DB4EB529B7A524006FEA4D /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DB4EB429B7A524006FEA4D /* NetworkError.swift */; };
+		28DB4EBA29B7B560006FEA4D /* APICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DB4EB929B7B560006FEA4D /* APICall.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,9 +96,15 @@
 		28053493299D04E200BCCD50 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		28053496299D15F800BCCD50 /* StorageRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRepo.swift; sourceTree = "<group>"; };
 		28053498299D1ACC00BCCD50 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		2834923D29BF5FEC00F9DD24 /* HTTPHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaders.swift; sourceTree = "<group>"; };
 		287A153A299D5EA9002B25F2 /* ParameterBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterBlock.swift; sourceTree = "<group>"; };
 		287A1545299D6679002B25F2 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		287A1547299D6797002B25F2 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		288AE1CA29BB638300E24C27 /* RequestParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestParameters.swift; sourceTree = "<group>"; };
+		28DB4EAF29B74E34006FEA4D /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		28DB4EB129B763F1006FEA4D /* NetworkConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfiguration.swift; sourceTree = "<group>"; };
+		28DB4EB429B7A524006FEA4D /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		28DB4EB929B7B560006FEA4D /* APICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICall.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +195,7 @@
 		2805343B299BBF1A00BCCD50 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				28DB4EAE29B74E18006FEA4D /* APIManager */,
 				28053495299D15DE00BCCD50 /* StorageService */,
 				2805343C299BBF2600BCCD50 /* CommonService.swift */,
 			);
@@ -257,6 +270,43 @@
 				28053498299D1ACC00BCCD50 /* StorageService.swift */,
 			);
 			path = StorageService;
+			sourceTree = "<group>";
+		};
+		28DB4EAE29B74E18006FEA4D /* APIManager */ = {
+			isa = PBXGroup;
+			children = (
+				28DB4EBB29B7B5E9006FEA4D /* Parameters */,
+				28DB4EB829B7B54E006FEA4D /* API */,
+				28DB4EB329B7A510006FEA4D /* Error */,
+				28DB4EAF29B74E34006FEA4D /* APIManager.swift */,
+				28DB4EB129B763F1006FEA4D /* NetworkConfiguration.swift */,
+			);
+			path = APIManager;
+			sourceTree = "<group>";
+		};
+		28DB4EB329B7A510006FEA4D /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				28DB4EB429B7A524006FEA4D /* NetworkError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		28DB4EB829B7B54E006FEA4D /* API */ = {
+			isa = PBXGroup;
+			children = (
+				28DB4EB929B7B560006FEA4D /* APICall.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		28DB4EBB29B7B5E9006FEA4D /* Parameters */ = {
+			isa = PBXGroup;
+			children = (
+				288AE1CA29BB638300E24C27 /* RequestParameters.swift */,
+				2834923D29BF5FEC00F9DD24 /* HTTPHeaders.swift */,
+			);
+			path = Parameters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,11 +404,14 @@
 				28053465299CADF600BCCD50 /* LaunchView.swift in Sources */,
 				28053497299D15F800BCCD50 /* StorageRepo.swift in Sources */,
 				287A1548299D6797002B25F2 /* ErrorView.swift in Sources */,
+				2834923E29BF5FEC00F9DD24 /* HTTPHeaders.swift in Sources */,
 				287A153B299D5EA9002B25F2 /* ParameterBlock.swift in Sources */,
+				28DB4EB529B7A524006FEA4D /* NetworkError.swift in Sources */,
 				28053499299D1ACC00BCCD50 /* StorageService.swift in Sources */,
 				2805348E299CD39000BCCD50 /* StepBlock.swift in Sources */,
 				28053494299D04E200BCCD50 /* SettingsView.swift in Sources */,
 				2805343A299BBE1900BCCD50 /* DependencyInjector.swift in Sources */,
+				288AE1CB29BB638300E24C27 /* RequestParameters.swift in Sources */,
 				2805343F299BBFB200BCCD50 /* Store.swift in Sources */,
 				28053467299CAE5700BCCD50 /* RocketModel.swift in Sources */,
 				2805345F299BCD9E00BCCD50 /* RocketView.swift in Sources */,
@@ -366,12 +419,15 @@
 				28053432299BBCA400BCCD50 /* CancelBag.swift in Sources */,
 				28053470299CB3D400BCCD50 /* Modifiers.swift in Sources */,
 				2805346E299CB1D300BCCD50 /* Extensions.swift in Sources */,
+				28DB4EB029B74E34006FEA4D /* APIManager.swift in Sources */,
 				287A1546299D6679002B25F2 /* Config.swift in Sources */,
 				2805342B299BBAD200BCCD50 /* AppDelegate.swift in Sources */,
 				28053415299BB8D700BCCD50 /* AppMainView.swift in Sources */,
 				2805342D299BBB2300BCCD50 /* SceneDelegate.swift in Sources */,
 				28053437299BBDA200BCCD50 /* AppEnvironment.swift in Sources */,
 				28053487299CBEED00BCCD50 /* Constants.swift in Sources */,
+				28DB4EB229B763F1006FEA4D /* NetworkConfiguration.swift in Sources */,
+				28DB4EBA29B7B560006FEA4D /* APICall.swift in Sources */,
 				28053492299D031E00BCCD50 /* LoadingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -513,7 +569,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dmitriy.RocketSwiftUIApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -542,7 +598,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dmitriy.RocketSwiftUIApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

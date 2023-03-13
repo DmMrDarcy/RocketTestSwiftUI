@@ -24,7 +24,7 @@ struct RocketModel: Codable {
     let wikipedia: String
     let welcomeDescription, id: String
 
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case height, diameter, mass
         case firstStage = "first_stage"
         case secondStage = "second_stage"
@@ -153,4 +153,3 @@ struct CompositeFairing: Codable {
 }
 
 typealias rocket = [RocketModel]
-

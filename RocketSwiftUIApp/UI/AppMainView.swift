@@ -23,7 +23,6 @@ struct AppMainView: View {
 extension AppMainView {
     class AppMainViewVM: ObservableObject {
         @Published var currentState: RoutingModel = .rocket
-        @Published var text: String = "Hello"
         
         let container: DIContainer
         private let cancelBag = CancelBag()

@@ -33,3 +33,10 @@ extension Encodable {
         return data
     }
 }
+
+extension DataConvertible where Self: Decodable {
+    init(with data: Data) throws {
+        let decoder = JSONDecoder()
+        self = try decoder.decode(Self.self, from: data)
+    }
+}

@@ -32,7 +32,7 @@ struct LaunchModel: Codable {
     let launchLibraryID: String?
     let id: String
 
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case fairings, links
         case staticFireDateUTC = "static_fire_date_utc"
         case staticFireDateUnix = "static_fire_date_unix"

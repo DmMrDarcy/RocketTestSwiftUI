@@ -6,34 +6,40 @@
 //
 
 import Foundation
-import Alamofire
+
+public protocol ConfigProtocol {
+    static var appVersion: String { get }
+}
 
 public struct Config {
-    public static var baseUrl = URL(string: "https://api.spacexdata.com/v4")!
+    init(){}
+
+    private static let infoDictionary: [String: Any] = {
+        guard let dict = Bundle.main.infoDictionary else {
+            fatalError("Plist file not found")
+        }
+        return dict
+    }()
+    
+    // x.y.z
+    public static var appVersion: String {
+        guard let value = Config.infoDictionary["CFBundleShortVersionString"] as? String else {
+            fatalError("App Version not set in plist for this environment")
+        }
+
+        return value
+    }
 }
 
 extension Config {
-    enum apiCall: String, Codable {
-        case rockets
-        case launches
+    enum EndPoint: String, Codable {
+        case rocket = "rocket"
         
-        var path: String {
+        var url: URL {
             switch self {
-            case .rockets:
-                return "rockets"
-            case .launches:
-                return "launches"
-            }
-        }
-        
-        var httpMethod: HTTPMethod {
-            switch self {
-            case .rockets:
-                return .get
-            case .launches:
-                return .get
+            case .rocket:
+                return URL(string: "https://api.spacexdata.com/v4")!
             }
         }
     }
 }
-

@@ -15,10 +15,11 @@ struct AppEnvironment {
 extension AppEnvironment {
     static func bootstrap() -> AppEnvironment {
         let appState = Store(AppState())
+        let apiManager = APIManager()
         let storageRepo = StorageRepo()
         let storageService = StorageService(appState: appState, repo: storageRepo)
         
-        let commonService = DIContainer.CommonService(appState: appState, storage: storageService)
+        let commonService = DIContainer.CommonService(appState: appState, apiManager: apiManager, storage: storageService)
         let diContainer = DIContainer(appState: appState, commonService: commonService)
 
         return AppEnvironment(container: diContainer)

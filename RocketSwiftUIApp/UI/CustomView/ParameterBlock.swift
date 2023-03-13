@@ -22,14 +22,13 @@ struct ParameterBlock: View {
 
 extension ParameterBlock {
     class ViewModel: ObservableObject {
-        
-        var type: TypeRocketParamsModel
-        var heightUnit: LongUnitsModel = .feat
-        var diameterUnit: LongUnitsModel = .feat
-        var massUnit: MassUnitsModel = .lb
-        var weightsUnit: MassUnitsModel = .kg
-        var rocket: RocketModel
-        let container: DIContainer
+        private var rocket: RocketModel
+        private let container: DIContainer
+        private var type: TypeRocketParamsModel
+        private var heightUnit: LongUnitsModel = .feat
+        private var diameterUnit: LongUnitsModel = .feat
+        private var massUnit: MassUnitsModel = .lb
+        private var weightsUnit: MassUnitsModel = .kg
         private let cancelBag = CancelBag()
         
         init(container: DIContainer, rocket: RocketModel, type: TypeRocketParamsModel) {
